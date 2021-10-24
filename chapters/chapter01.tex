@@ -1,0 +1,63 @@
+\section{前言以及所有}
+
+天津大学作为一所985高校居然没有自己的模板，真的有点离谱。
+
+
+我在写论文的时候出于个人兴趣写了这个模板出来，建议使用overleaf直接上传使用，如果本地编译需要注意使用biblatex来实现gb7714的引用文献格式。如何编译具体可以参见
+\url{https://github.com/hushidong/biblatex-gb7714-2015}
+
+
+我只能说尽量维持了模板的简洁，保证了实用性，但是本人也是\LaTeX 萌新，很多东西不是很熟悉，在使用之前建议看看ctex手册。公式可以通过\ref{beginer}的方式来插入
+
+\begin{equation}
+    \bm{E} = mc^2
+    \label{beginer}
+\end{equation}
+
+
+图像可以通过\ref{logo}的方式插入
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.4\textwidth]{logo.jpg}}
+\caption{天津大学的logo}
+\label{logo}
+\end{figure}
+
+当然可以插入两张图片
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth] {logo.jpg}  
+  \caption{天津大学的logo}
+  \label{celoss}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{logo.jpg}  
+  \caption{天津大学的logo}
+  \label{mseloss}
+\end{subfigure}
+\caption{俩logo}
+\label{pretextloss}
+\end{figure}
+
+三线表建议使用在线表格绘制工具 \url{https://www.tablesgenerator.com/}，当然要记得自己加上控制语句来控制是否需要居中等，这里也非常鼓励大家使用$tabularx$类库来控制表格，可以控制出各种长度的表格。
+
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cc}
+\hline
+食堂编号 & 食堂名称 \\ \hline
+学一   & 梅园   \\
+学二   & 兰园   \\
+学四   & 竹园   \\ \hline
+\end{tabular}
+\end{table}
+
+
+由于自己在写论文的时候遇到的奇怪的问题，需要调整的格式比较少，所以本身也没有做很多很复杂的功能，需要遇到问题多多百度，保持自己的求知欲。
+
+最后，预祝大家顺利毕业。

@@ -1,0 +1,169 @@
+% Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{tjuthesis}[2021/09/26 Tianjin University Thesis Template]
+
+% Preliminary declarations and Options
+\RequirePackage{ctex}
+\RequirePackage{xeCJK}
+\RequirePackage{xcolor}                     % 使输出的pdf更适配彩色的图像
+\RequirePackage{bm}                         % 为公式提供的加粗
+\RequirePackage{subcaption}                 % 制作带子图的图像
+\RequirePackage{multirow}                   % 表格合并、拆分
+\RequirePackage[noend]{algpseudocode}       % 伪代码类库
+\RequirePackage{algorithmicx}
+\RequirePackage{algorithm}
+\RequirePackage{inputenc}
+\RequirePackage{graphicx}                   %  图标库
+\RequirePackage{fancyhdr}                   % 页眉页脚
+\RequirePackage{setspace}
+
+\RequirePackage{rotating}                   % 表格横置包
+
+\RequirePackage{lscape}                     %制作横页
+\RequirePackage{afterpage}                      %插入空白页
+\RequirePackage{tocloft}                        %  目录插入点
+\RequirePackage{tabularx}                       % 表格自动缩进到页面大小
+
+% 自动生成超链接
+\RequirePackage[colorlinks=false, pdfborder={0 0 0}]{hyperref}      
+% bib格式借用biblatex采用gb7714风格
+\RequirePackage[backend=biber,style=gb7714-2015,gbnamefmt=lowercase, gbpub=false]{biblatex}
+% geometry基础配置，指定纸张大小
+\RequirePackage{geometry}
+
+% 通用的一些定义
+\pagestyle{fancy}
+\setlength{\headheight}{50pt}
+\geometry{
+    a4paper,
+    left=35.7mm, 
+    right=27.7mm, 
+    top=27.5mm, 
+    bottom=25.4mm,
+    twoside
+}
+
+% More declarations
+% CTEX格式配置，使用ctexset指定论文格式
+\ctexset{
+    today=big,
+    chapter = {
+        format += \Large,
+        number = \arabic{chapter},
+        pagestyle = fancy,
+        beforeskip=35pt,
+        afterskip=35pt
+    },
+    section = {
+        format += \raggedright\large,
+        beforeskip=24pt,
+        afterskip=24pt
+    },
+    subsection = {
+        beforeskip=15pt,
+        afterskip=15pt
+    },
+    subsubsection = {
+        beforeskip=12pt,
+        afterskip=12pt
+    }
+}
+
+
+% 制作封面，重写命令\maketitle来制作封面
+\let\CTITLE\EMPTY
+\let\ETITLE\EMPTY
+\let\AUTHOR\EMPTY
+\let\PROFESSIONAL\EMPTY
+\let\TUTOR\EMPTY
+\let\COLLEGE\EMPTY
+\let\DATE\EMPTY
+\let\SUBJECT\EMPTY
+
+\newcommand{\ctitle}[1]{\def\CTITLE {#1}}
+\newcommand{\etitle}[1]{\def\ETITLE {#1}}
+\newcommand{\college}[1]{\def\COLLEGE {#1}}
+\newcommand{\professional}[1]{\def\PROFESSIONAL {#1}}
+\newcommand{\tutor}[1]{\def\TUTOR {#1}}
+\newcommand{\subject}[1]{\def\SUBJECT {#1}}
+
+\renewcommand{\author}[1]{\def\AUTHOR {#1}}
+\renewcommand{\date}[1]{\def\DATE {#1}}
+
+\renewcommand{\maketitle}{
+    \begin{center}
+        \vspace*{3cm}
+        {
+            \setstretch{3}
+            {\Huge\CTITLE}
+            \par\vspace{3cm}
+            \setstretch{1.5}
+            \textbf{\Large\ETITLE}
+            \par\vfill
+        }
+
+        \begin{table}[h]
+            \linespread{1.5}
+            \centering\large
+            \begin{tabular}{lp{4cm}}
+                一级学科： & \SUBJECT \\ \cline{2-2} 
+                研究方向： & \PROFESSIONAL \\ \cline{2-2} 
+                作者姓名： & \AUTHOR    \\ \cline{2-2} 
+                指导教师： & \TUTOR     \\ \cline{2-2} 
+            \end{tabular}
+        \end{table}
+        \vfill
+
+       \large\COLLEGE
+       \par
+       \large\DATE
+   \end{center}
+}
+
+\newcommand{\tjudeclare}{\textbf{\underline{\heiti{\ 天津大学\ }}}}
+
+
+
+% 原创性声明页眉页脚设置
+\newcommand{\decheader}{
+    \setcounter{page}{0}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{\empty}
+    \fancyfoot{\empty}
+}
+
+% 摘要页眉页脚设置
+\newcommand{\frontheader}{
+    \setcounter{page}{0}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \fancyfoot[CE,CO]{\normalsize{\thepage}}
+    \pagenumbering{Roman}
+}
+
+% 正文页眉页脚设置
+\newcommand{\mainheader}{
+\renewcommand{\headrulewidth}{1pt}
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+    \fancyhead{}
+    \fancyfoot[CE,CO]{\normalsize{\thepage}}
+    \fancyhead[CE]{\normalsize{天津大学硕士论文}}
+    \fancyhead[CO]{\normalsize{\leftmark}}
+}
+
+% 清除偶数页，使从奇数页开始
+\let\originalchapter=\chapter
+\def\chapter{\cleardoublepage\originalchapter}
+
+% 插入空白页
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage
+}
+
+% 目录 '...'  填充
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\contentsname}{\centerline{目录}}
