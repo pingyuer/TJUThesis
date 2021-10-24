@@ -7,14 +7,14 @@
 由于使用了biblatex，因此需要使用以下命令进行编译
 
 ```
-  xelatex jobname.tex
-	biber jobname
-	xelatex jobname.tex
-	xelatex jobname.tex
+xelatex jobname.tex
+biber jobname
+xelatex jobname.tex
+xelatex jobname.tex
 ```
 
 或者
 
 ```
-	latexmk -xelatex jobname.tex
+latexmk -xelatex jobname.tex
 ```
